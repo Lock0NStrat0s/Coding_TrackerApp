@@ -9,7 +9,36 @@ public class Program
 {
     static void Main(string[] args)
     {
-        MainMenu();
+        //MainMenu();
+
+        SqliteCRUD sql = new SqliteCRUD(GetConnectionString());
+
+        ReadDateLog(sql);
+    }
+
+    private static void ReadDateLog(SqliteCRUD sql)
+    {
+        var rows = sql.GetDateLog();
+
+        foreach (var row in rows)
+        {
+            Console.WriteLine($"{row.Id}: {row.Date}");
+        }
+    }
+
+    private static string GetConnectionString(string connectionStringName = "Default")
+    {
+        string output = "";
+
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json");
+
+        var config = builder.Build();
+
+        output = config.GetConnectionString(connectionStringName);
+
+        return output;
     }
 
     private static void MainMenu()
@@ -74,18 +103,5 @@ public class Program
         return sqlite_conn;
     }
 
-    private static string GetConnectionString(string connectionStringName = "Default")
-    {
-        string output = "";
-
-        var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json");
-
-        var config = builder.Build();
-
-        output = config.GetConnectionString(connectionStringName);
-
-        return output;
-    }
+    
 }

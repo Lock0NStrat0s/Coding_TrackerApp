@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Coding_Tracker.Models;
 
-public class LogId
+public class LogIdModel
 {
     public int Id { get; set; }
     public int DateId { get; set; }

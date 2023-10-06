@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Coding_Tracker.Models;
 
-public class TimeLog
+public class DateLogModel
 {
     public int Id { get; set; }
-    public string? StartTime { get; set; }
-    public string? EndTime { get; set; }
+    public string? Date { get; set; }
 }
